@@ -1,3 +1,5 @@
+import { cx0, cy0, multiplicationFactor, r0, samples, svgns } from "./constant";
+
 console.log("CCOUCOURR");
 
 //add small circle
