@@ -1,0 +1,22 @@
+:root {
+  --color: black;
+}
+svg {
+  border: 0.1em solid var(--color);
+  width: 50em;
+  height: 25em;
+}
+
+circle {
+  stroke: black;
+  stroke-width: 0.3;
+  fill: transparent;
+}
+
+g.samples circle {
+  fill: black;
+}
+
+g.lines line {
+  stroke: var(--color);
+}

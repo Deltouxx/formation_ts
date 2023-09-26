@@ -1,21 +1,15 @@
 {
-  "name": "multiplication",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "front",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "tsc",
-    "clean": "rimraf dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "rimraf": "^5.0.4",
-    "typescript": "^5.2.2"
-  },
-  "dependencies": {
-    "serve": "^14.2.1"
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
   }
 }
