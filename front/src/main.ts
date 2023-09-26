@@ -1,8 +1,9 @@
 import "./style.css";
 import { cx0, cy0, multiplicationFactor, r0, samples, svgns } from "./constant";
+import { $ } from "./misc";
 
 //add small circle
-const sampleContainer = document.querySelector("g.samples");
+const sampleContainer = $("g.samples");
 if (sampleContainer === null) {
   throw new Error("OUPSSS");
 }
@@ -20,7 +21,7 @@ for (let i = 0; i < samples; i++) {
 }
 
 //draw lines
-const lineContainer = document.querySelector("g.lines");
+const lineContainer = $("g.lines");
 if (lineContainer === null) {
   throw new Error("OUPSSS");
 }
