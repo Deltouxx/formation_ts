@@ -1,4 +1,5 @@
 import { Config } from "./Config";
+import { url } from "./constant";
 import { $, getKeys, sleep } from "./misc";
 type Callback = (newConfig: Config) => void;
 
@@ -68,8 +69,15 @@ export class Command {
   }
   setRandomBtnAction() {
     const randomBtn = $(`div.command div.buttons button.random`);
-    randomBtn.addEventListener("click", () => {
-      console.log("RANDOM CLICK");
+    randomBtn.addEventListener("click", async () => {
+      try {
+        console.log("RANDOM CLICK");
+        const response = await fetch(url);
+        const config: Config = await response.json();
+        this.setConfig(config);
+      } catch (err) {
+        console.log("err: ", err);
+      }
     });
   }
 
