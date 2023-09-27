@@ -1,5 +1,5 @@
 import { Config } from "./Config";
-import { $ } from "./misc";
+import { $, getKeys } from "./misc";
 type Callback = (newConfig: Config) => void;
 
 export class Command {
@@ -29,7 +29,7 @@ export class Command {
   }
 
   public render() {
-    const keys: (keyof Config)[] = ["samples", "multiplicationFactor"];
+    const keys: (keyof Config)[] = getKeys(this.config);
 
     for (const key of keys) {
       const elt = $(`div.command label.${key} .value`);
