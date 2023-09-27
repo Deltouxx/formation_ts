@@ -1,17 +1,18 @@
 import { Config } from "./Config";
-import { $, getKeys } from "./misc";
+import { $, getKeys, sleep } from "./misc";
 type Callback = (newConfig: Config) => void;
 
 export class Command {
-  // #region Properties (2)
+  // #region Properties (3)
 
-  public callback: Callback = () => {};
-  public config: Config = {
+  private callback: Callback = () => {};
+  private config: Config = {
     samples: 0,
     multiplicationFactor: 0,
   };
+  private isPlaying = false;
 
-  // #endregion Properties (2)
+  // #endregion Properties (3)
 
   // #region Constructors (1)
 
@@ -22,13 +23,21 @@ export class Command {
 
   // #endregion Constructors (1)
 
-  // #region Public Methods (5)
+  // #region Public Methods (6)
 
-  public onUpdate(callback: Callback) {
+  onUpdate(callback: Callback) {
     this.callback = callback;
   }
 
-  public render() {
+  async play() {
+    while (this.isPlaying) {
+      await sleep(1000 / 60);
+      const mf = +((this.config.multiplicationFactor + 0.01) % 100).toFixed(2);
+      this.setConfig({ ...this.config, multiplicationFactor: mf });
+    }
+  }
+
+  render() {
     const keys: (keyof Config)[] = getKeys(this.config);
 
     for (const key of keys) {
@@ -37,6 +46,9 @@ export class Command {
       const slider = $(`div.command label.${key} input`, HTMLInputElement);
       slider.value = this.config[key] + "";
     }
+    $(`div.command div.buttons button.play`).innerHTML = this.isPlaying
+      ? "Pause"
+      : "Play";
   }
 
   public setActions() {
@@ -52,6 +64,13 @@ export class Command {
     }
 
     this.setPlayBtnActions();
+    this.setRandomBtnAction();
+  }
+  setRandomBtnAction() {
+    const randomBtn = $(`div.command div.buttons button.random`);
+    randomBtn.addEventListener("click", () => {
+      console.log("RANDOM CLICK");
+    });
   }
 
   public setConfig(config: Config) {
@@ -64,8 +83,13 @@ export class Command {
     const playBtn = $(`div.command div.buttons button.play`);
     playBtn.addEventListener("click", () => {
       console.log("PLAY CLICK");
+      this.isPlaying = !this.isPlaying;
+      this.render();
+      if (this.isPlaying) {
+        this.play();
+      }
     });
   }
 
-  // #endregion Public Methods (5)
+  // #endregion Public Methods (6)
 }

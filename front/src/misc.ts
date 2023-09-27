@@ -22,3 +22,11 @@ export const setAttributeNbr = (
 export const getKeys = <T extends object>(o: T): (keyof T)[] => {
   return Object.keys(o) as (keyof T)[];
 };
+
+type millisecond = number;
+
+export const sleep = (delay: millisecond): Promise<void> => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+};
