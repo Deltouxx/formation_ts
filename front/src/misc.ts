@@ -5,3 +5,11 @@ export const $ = (selector: string): Element => {
   }
   return elt;
 };
+
+export const setAttributeNbr = (
+  elt: Element,
+  key: string,
+  value: number
+): void => {
+  elt.setAttributeNS(null, key, value + "");
+};

@@ -1,6 +1,6 @@
 import "./style.css";
 import { cx0, cy0, multiplicationFactor, r0, samples, svgns } from "./constant";
-import { $ } from "./misc";
+import { $, setAttributeNbr } from "./misc";
 
 //add small circle
 const sampleContainer = $("g.samples");
@@ -12,10 +12,15 @@ for (let i = 0; i < samples; i++) {
   const cx = cx0 + r0 * Math.cos(angle);
   const cy = cy0 + r0 * Math.sin(angle);
   const circle = document.createElementNS(svgns, "circle");
-
+  /*
   circle.setAttributeNS(null, "cx", cx + "");
   circle.setAttributeNS(null, "cy", cy.toString());
   circle.setAttributeNS(null, "r", "1");
+*/
+
+  setAttributeNbr(circle, "cx", cx);
+  setAttributeNbr(circle, "cy", cy);
+  setAttributeNbr(circle, "r", 1);
 
   sampleContainer.appendChild(circle);
 }
@@ -36,10 +41,10 @@ for (let i = 0; i < samples; i++) {
   const y2 = cy0 + r0 * Math.sin(angle2);
   const lines = document.createElementNS(svgns, "line");
 
-  lines.setAttributeNS(null, "x1", x1.toString());
-  lines.setAttributeNS(null, "y1", y1.toString());
-  lines.setAttributeNS(null, "x2", x2.toString());
-  lines.setAttributeNS(null, "y2", y2.toString());
+  setAttributeNbr(lines, "x1", x1);
+  setAttributeNbr(lines, "y1", y1);
+  setAttributeNbr(lines, "x2", x2);
+  setAttributeNbr(lines, "y2", y2);
 
   lineContainer.appendChild(lines);
 }
