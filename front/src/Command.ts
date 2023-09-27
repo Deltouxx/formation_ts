@@ -5,8 +5,8 @@ type Callback = (newConfig: Config) => void;
 export class Command {
   // #region Properties (2)
 
-  callback: Callback = () => {};
-  config: Config = {
+  public callback: Callback = () => {};
+  public config: Config = {
     samples: 0,
     multiplicationFactor: 0,
   };
@@ -22,7 +22,7 @@ export class Command {
 
   // #endregion Constructors (1)
 
-  // #region Public Methods (4)
+  // #region Public Methods (5)
 
   public onUpdate(callback: Callback) {
     this.callback = callback;
@@ -50,6 +50,8 @@ export class Command {
         this.setConfig(newConfig);
       });
     }
+
+    this.setPlayBtnActions();
   }
 
   public setConfig(config: Config) {
@@ -58,5 +60,12 @@ export class Command {
     this.callback(this.config);
   }
 
-  // #endregion Public Methods (4)
+  public setPlayBtnActions() {
+    const playBtn = $(`div.command div.buttons button.play`);
+    playBtn.addEventListener("click", () => {
+      console.log("PLAY CLICK");
+    });
+  }
+
+  // #endregion Public Methods (5)
 }
