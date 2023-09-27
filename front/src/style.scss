@@ -44,3 +44,13 @@ div.command {
     flex-flow: column;
   }
 }
+
+div.buttons {
+  display: flex;
+  justify-content: space-around;
+
+  button {
+    padding: 0.5em 1em;
+    cursor: pointer;
+  }
+}
