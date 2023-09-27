@@ -28,6 +28,7 @@ g.samples circle {
 
 g.lines line {
   stroke: var(--color);
+  stroke-width: 0.3;
 }
 
 div.command {

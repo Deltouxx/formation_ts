@@ -1,9 +1,15 @@
-export const $ = (selector: string): Element => {
+export const $ = <T extends Element>(
+  selector: string,
+  type?: new () => T
+): T => {
   const elt = document.querySelector(selector);
   if (elt === null) {
     throw new Error(`Cannont find selector ${selector}`);
   }
-  return elt;
+  if (type && !(elt instanceof type)) {
+    throw new Error(`selector ${selector} is not of type ${type}`);
+  }
+  return elt as T;
 };
 
 export const setAttributeNbr = (

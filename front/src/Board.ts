@@ -13,6 +13,7 @@ export class Board {
   // #region Public Methods (2)
 
   public draw() {
+    this.clean();
     const { samples, multiplicationFactor } = this.#config;
     //add small circle
     const sampleContainer = $("g.samples");
@@ -55,6 +56,10 @@ export class Board {
 
       lineContainer.appendChild(lines);
     }
+  }
+  clean() {
+    $("g.samples").innerHTML = "";
+    $("g.lines").innerHTML = "";
   }
 
   public setConfig(config: Config) {
