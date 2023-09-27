@@ -2,12 +2,14 @@ const express = require("express");
 const serveIndex = require("serve-index");
 const app = express();
 const port = 3000;
+const api = require("./api");
 
 const publicDir = ".";
 app.use((req, res, next) => {
   console.log(req.method, req.path);
   next();
 });
+app.use("/api", api);
 
 app.use(express.static(publicDir));
 app.use(serveIndex(publicDir, { icons: true }));
