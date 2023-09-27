@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 
 const app = express.Router();
 
@@ -8,8 +8,9 @@ app.use((req, res, next) => {
 });
 app.get("/random-config", (req, res) => {
   res.json({
-    sample: Math.randomInt(700),
-    multiplicationFactor: Math.random() * 100,
+    sample: Math.floor(Math.random() * 700),
+    multiplicationFactor: Math.floor(Math.random() * 100),
   });
 });
-module.exports = app;
+
+export default app;
