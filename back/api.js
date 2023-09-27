@@ -7,6 +7,9 @@ app.use((req, res, next) => {
   next();
 });
 app.get("/random-config", (req, res) => {
-  res.json({ samples: 500, multiplicationFactor: 14.5 });
+  res.json({
+    sample: Math.randomInt(700),
+    multiplicationFactor: Math.random() * 100,
+  });
 });
 module.exports = app;
