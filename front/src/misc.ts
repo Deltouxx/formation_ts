@@ -1,7 +1,6 @@
-export const $ = <T extends Element>(
-  selector: string,
-  type?: new () => T
-): T => {
+import { Class } from "./interface/Class";
+
+export const $ = <T extends Element>(selector: string, type?: Class<T>): T => {
   const elt = document.querySelector(selector);
   if (elt === null) {
     throw new Error(`Cannont find selector ${selector}`);
