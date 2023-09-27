@@ -1,6 +1,7 @@
 import "./style.css";
-import { cx0, cy0, multiplicationFactor, r0, samples, svgns } from "./constant";
+import { multiplicationFactor, samples, svgns } from "./constant";
 import { $, setAttributeNbr } from "./misc";
+import { getAngle, getPoint } from "./maths";
 
 //add small circle
 const sampleContainer = $("g.samples");
@@ -8,9 +9,9 @@ if (sampleContainer === null) {
   throw new Error("OUPSSS");
 }
 for (let i = 0; i < samples; i++) {
-  const angle = (i * 2 * Math.PI) / samples + Math.PI / 2;
-  const cx = cx0 + r0 * Math.cos(angle);
-  const cy = cy0 + r0 * Math.sin(angle);
+  const angle = getAngle(i, samples);
+  const { x: cx, y: cy } = getPoint(angle);
+
   const circle = document.createElementNS(svgns, "circle");
   /*
   circle.setAttributeNS(null, "cx", cx + "");
@@ -31,20 +32,15 @@ if (lineContainer === null) {
   throw new Error("OUPSSS");
 }
 for (let i = 0; i < samples; i++) {
-  const angle1 = (i * 2 * Math.PI) / samples - Math.PI / 2;
-  const x1 = cx0 + r0 * Math.cos(angle1);
-  const y1 = cy0 + r0 * Math.sin(angle1);
+  const p1 = getPoint(getAngle(i, samples));
+  const p2 = getPoint(getAngle(i * multiplicationFactor, samples));
 
-  const angle2 =
-    (i * multiplicationFactor * 2 * Math.PI) / samples - Math.PI / 2;
-  const x2 = cx0 + r0 * Math.cos(angle2);
-  const y2 = cy0 + r0 * Math.sin(angle2);
   const lines = document.createElementNS(svgns, "line");
 
-  setAttributeNbr(lines, "x1", x1);
-  setAttributeNbr(lines, "y1", y1);
-  setAttributeNbr(lines, "x2", x2);
-  setAttributeNbr(lines, "y2", y2);
+  setAttributeNbr(lines, "x1", p1.x);
+  setAttributeNbr(lines, "y1", p1.y);
+  setAttributeNbr(lines, "x2", p2.x);
+  setAttributeNbr(lines, "y2", p2.y);
 
   lineContainer.appendChild(lines);
 }
