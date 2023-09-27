@@ -1,0 +1,45 @@
+:root {
+  --color: black;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  //font: "Aboreto";
+}
+
+svg {
+  border: 0.1em solid var(--color);
+  width: 50em;
+  height: 25em;
+}
+
+circle {
+  stroke: black;
+  stroke-width: 0.3;
+  fill: transparent;
+}
+
+g.samples circle {
+  fill: black;
+}
+
+g.lines line {
+  stroke: var(--color);
+}
+
+div.command {
+  border: 0.1em solid var(--color);
+  width: 50em;
+  padding: 0.5em;
+  display: flex;
+  flex-flow: column;
+  gap: 1em;
+
+  label {
+    display: flex;
+    flex-flow: column;
+  }
+}
